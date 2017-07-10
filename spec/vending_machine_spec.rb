@@ -28,6 +28,15 @@ describe 'VendingMachine' do
         expect(@vm.get_display).to eql '$1.25'
       end
     end
+
+    context 'when an item is selected' do
+      it 'the display says THANK YOU, only the next time its checked' do
+        item = Item::CHIPS
+        @vm.select_item item
+        expect(@vm.get_display).to eql 'THANK YOU'
+        expect(@vm.get_display).to eql 'INSERT COINS'
+      end
+    end
   end
 
   describe '.get_credits' do
