@@ -38,6 +38,14 @@ describe 'VendingMachine' do
     end
   end
 
+  describe '.check_coin_return' do
+    context 'when no coins have been returned' do
+      it 'returns a value of 0' do
+        expect(@vm.check_coin_return).to eql 0
+      end
+    end
+  end
+
   describe '.get_value' do
     context 'when a coin is examined' do
       it 'returns the coins value' do
