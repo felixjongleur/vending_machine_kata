@@ -40,6 +40,10 @@ class VendingMachine
     coin_return
   end
 
+  def check_stock(item)
+    false
+  end
+
   def select_item(item)
 
 
