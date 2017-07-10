@@ -18,6 +18,10 @@ class VendingMachine
     credits
   end
 
+  def check_coin_return
+    0
+  end
+
   def insert_coin(coin)
     @credits += get_value(coin)
   end
