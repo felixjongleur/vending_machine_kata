@@ -46,6 +46,14 @@ describe 'VendingMachine' do
     end
   end
 
+  describe '.check_product_bin' do
+    context 'when no product has been purchased' do
+      it 'returns nothing' do
+        expect(@vm.check_product_bin).to eql nil
+      end
+    end
+  end
+
   describe '.return_coins' do
     context 'when the return coins button is pressed' do
       it 'places any inserted coins into the coin return and resets the display' do

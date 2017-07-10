@@ -23,6 +23,10 @@ class VendingMachine
     coin_return
   end
 
+  def check_product_bin
+
+  end
+
   def return_coins
     @coin_return += @credits
     @credits = 0
