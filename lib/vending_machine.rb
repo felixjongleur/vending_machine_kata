@@ -42,7 +42,7 @@ class VendingMachine
   end
 
   def add_to_inventory(item)
-
+    @inventory[item.name] = item
   end
 
   def check_stock(item)
