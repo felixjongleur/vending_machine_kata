@@ -39,6 +39,7 @@ class VendingMachine
     else
       @item_selected = true
       @product_bin = item
+      @coin_return += (credits - item.price)
       @credits = 0
     end
   end
