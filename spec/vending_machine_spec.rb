@@ -102,6 +102,16 @@ describe 'VendingMachine' do
         expect(@vm.inventory.has_key? 'Candy').to be true
       end
     end
+
+    context 'when multiple of the same item is added to the inventory' do
+      it 'adds both to the inventory' do
+        item1 = Item.new('Candy', 65)
+        item2 = Item.new('Candy', 65)
+        @vm.add_to_inventory item1
+        @vm.add_to_inventory item2
+        expect(@vm.inventory['Candy']).to be [item1, item2]
+      end
+    end
   end
 
   describe '.get_credits' do
