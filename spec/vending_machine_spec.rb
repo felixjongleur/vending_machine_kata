@@ -144,6 +144,17 @@ describe 'VendingMachine' do
         expect(@vm.check_product_bin).to eql item
         expect(@vm.get_credits).to eql 0
       end
+
+    end
+    context 'when an item is selected' do
+      it 'any remainder credits are placed in the coin return' do
+        @vm.insert_coin Coin::QUARTER
+        @vm.insert_coin Coin::QUARTER
+        @vm.insert_coin Coin::QUARTER
+        item = Item.new('Chips', 50)
+        @vm.select_item item
+        expect(@vm.check_coin_return).to eql 25
+      end
     end
   end
 end
