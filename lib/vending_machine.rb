@@ -23,6 +23,11 @@ class VendingMachine
     coin_return
   end
 
+  def return_coins
+    @coin_return += @credits
+    @credits = 0
+  end
+
   def insert_coin(coin)
     if valid_coin? coin
       @credits += get_value(coin)
