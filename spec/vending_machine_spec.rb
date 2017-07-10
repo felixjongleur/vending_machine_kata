@@ -15,7 +15,7 @@ describe 'VendingMachine' do
     context 'when it is a valid coin' do
       it 'returns TRUE' do
         @vm = VendingMachine.new
-        expect(@vm.valid_coin?(Coin::PENNY)).to be true
+        expect(@vm.valid_coin?(Coin::NICKEL)).to be true
       end
     end
   end
