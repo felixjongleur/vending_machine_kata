@@ -15,7 +15,20 @@ class VendingMachine
   end
 
   def insert_coin(coin)
-    @credits = 5
+    @credits += get_value(coin)
+  end
+
+  def get_value(coin)
+    case coin
+      when 3
+        return 5
+      when 1
+        return 10
+      when 4
+        return 25
+      else
+        0
+    end
   end
 
   def valid_coin?(coin)

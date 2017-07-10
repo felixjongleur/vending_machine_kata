@@ -22,11 +22,25 @@ describe 'VendingMachine' do
     end
   end
 
+  describe '.get_value' do
+    context 'when a coin is examined' do
+      it 'returns the coins value' do
+        expect(@vm.get_value(Coin::NICKEL)).to eql 5
+        expect(@vm.get_value(Coin::DIME)).to eql 10
+        expect(@vm.get_value(Coin::QUARTER)).to eql 25
+      end
+    end
+  end
+
   describe '.insert_coin' do
     context 'when a valid coin has been inserted' do
       it 'adds its value to the current credits' do
         @vm.insert_coin Coin::NICKEL
         expect(@vm.get_credits).to eql 5
+        @vm.insert_coin Coin::DIME
+        expect(@vm.get_credits).to eql 15
+        @vm.insert_coin Coin::QUARTER
+        expect(@vm.get_credits).to eql 40
       end
     end
   end
