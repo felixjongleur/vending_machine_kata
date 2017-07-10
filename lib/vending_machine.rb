@@ -10,7 +10,7 @@ class VendingMachine
   def get_display
     if insufficient_funds
       @insufficient_funds = false
-      display = '$%.2f' % (item_selected.price.to_i/100.0)
+      display = format_to_money item_selected.price
       @item_selected = nil
       return display
     end
@@ -24,7 +24,11 @@ class VendingMachine
       return 'INSERT COINS'
     end
 
-    '$%.2f' % (credits.to_i/100.0)
+    format_to_money credits
+  end
+
+  def format_to_money(amount)
+    '$%.2f' % (amount.to_i/100.0)
   end
 
   def get_credits
