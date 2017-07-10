@@ -4,6 +4,10 @@ class VendingMachine
     'INSERT COINS'
   end
 
+  def get_credits
+    0
+  end
+
   def valid_coin?(coin)
     if coin == 2
      return false

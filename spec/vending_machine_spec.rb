@@ -14,6 +14,14 @@ describe 'VendingMachine' do
     end
   end
 
+  describe '.get_credits' do
+    context 'when no coins have been inserted' do
+      it 'returns a value of 0' do
+        expect(@vm.get_credits).to eql 0
+      end
+    end
+  end
+
   describe '.valid_coin' do
     context 'when it is a valid coin' do
       it 'returns TRUE' do
