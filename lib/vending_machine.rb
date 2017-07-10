@@ -5,6 +5,8 @@ class VendingMachine
   end
 
   def valid_coin?(coin)
-
+    if coin == 3
+      true
+    end
   end
 end
