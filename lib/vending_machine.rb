@@ -50,6 +50,9 @@ class VendingMachine
   end
 
   def check_stock(item)
+    if @inventory.has_key? item.name
+      return true
+    end
     false
   end
 
