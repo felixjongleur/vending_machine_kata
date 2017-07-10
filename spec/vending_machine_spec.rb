@@ -31,14 +31,32 @@ describe 'VendingMachine' do
 
     context 'when an item is selected with no credits' do
       it 'the display shows the items PRICE once, then INSERT COINS' do
+        item = Item.new('Pop', 100)
+        @vm.select_item item
+        expect(@vm.get_display).to eql '$1.00'
+        expect(@vm.get_display).to eql 'INSERT COINS'
         item = Item.new('Chips', 50)
         @vm.select_item item
         expect(@vm.get_display).to eql '$0.50'
         expect(@vm.get_display).to eql 'INSERT COINS'
+        item = Item.new('Candy', 65)
+        @vm.select_item item
+        expect(@vm.get_display).to eql '$0.65'
+        expect(@vm.get_display).to eql 'INSERT COINS'
       end
     end
 
-    context 'when an item is selected' do
+    context 'when an item is selected with some, but not enough credits' do
+      it 'the display shows the items PRICE once, then the current value of credits' do
+        @vm.insert_coin Coin::QUARTER
+        item = Item.new('Chips', 50)
+        @vm.select_item item
+        expect(@vm.get_display).to eql '$0.50'
+        expect(@vm.get_display).to eql '$0.25'
+      end
+    end
+
+    context 'when an item is selected and there is sufficient funds' do
       it 'the display says THANK YOU, only the next time its checked' do
         @vm.insert_coin Coin::QUARTER
         @vm.insert_coin Coin::QUARTER
