@@ -42,7 +42,11 @@ class VendingMachine
   end
 
   def add_to_inventory(item)
-    @inventory[item.name] = item
+    if @inventory.has_key? item.name
+      @inventory[item.name].push item
+    else
+      @inventory[item.name] = [item]
+    end
   end
 
   def check_stock(item)

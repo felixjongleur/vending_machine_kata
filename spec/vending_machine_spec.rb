@@ -109,7 +109,22 @@ describe 'VendingMachine' do
         item2 = Item.new('Candy', 65)
         @vm.add_to_inventory item1
         @vm.add_to_inventory item2
-        expect(@vm.inventory['Candy']).to be [item1, item2]
+        expect(@vm.inventory['Candy']).to eq [item1, item2]
+      end
+    end
+
+    context 'when multiple of different items are added to the inventory' do
+      it 'adds all items to the inventory' do
+        item1 = Item.new('Candy', 65)
+        item2 = Item.new('Candy', 65)
+        item3 = Item.new('Pop', 100)
+        item4 = Item.new('Pop', 100)
+        @vm.add_to_inventory item1
+        @vm.add_to_inventory item2
+        @vm.add_to_inventory item3
+        @vm.add_to_inventory item4
+        expect(@vm.inventory['Candy']).to eq [item1, item2]
+        expect(@vm.inventory['Pop']).to eq [item3, item4]
       end
     end
   end
