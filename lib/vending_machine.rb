@@ -1,6 +1,6 @@
 class VendingMachine
 
-  attr_accessor :credits, :coin_return, :product_bin, :item_selected
+  attr_accessor :credits, :coin_return, :product_bin, :item_selected, :insufficient_funds
 
   def initialize
     @credits = 0
@@ -8,6 +8,11 @@ class VendingMachine
   end
 
   def get_display
+    if insufficient_funds
+      @insufficient_funds = false
+      return '$0.50'
+    end
+
     if item_selected
       @item_selected = false
       return 'THANK YOU'
@@ -29,8 +34,13 @@ class VendingMachine
   end
 
   def select_item(item)
-    @product_bin = item
-    @item_selected = true
+    if credits < item.price
+      @insufficient_funds = true
+    else
+      @item_selected = true
+      @product_bin = item
+      @credits = 0
+    end
   end
 
   def check_product_bin
