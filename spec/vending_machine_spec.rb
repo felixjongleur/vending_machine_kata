@@ -29,6 +29,15 @@ describe 'VendingMachine' do
       end
     end
 
+    context 'when an item is selected with no credits' do
+      it 'the display shows the items PRICE once, then INSERT COINS' do
+        item = Item::CHIPS
+        @vm.select_item item
+        expect(@vm.get_display).to eql '$0.50'
+        expect(@vm.get_display).to eql 'INSERT COINS'
+      end
+    end
+
     context 'when an item is selected' do
       it 'the display says THANK YOU, only the next time its checked' do
         item = Item::CHIPS
