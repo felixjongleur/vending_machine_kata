@@ -2,6 +2,10 @@ class VendingMachine
 
   attr_accessor :credits
 
+  def initialize
+    @credits = 0
+  end
+
   def get_display
     'INSERT COINS'
   end
