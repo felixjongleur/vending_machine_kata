@@ -18,6 +18,13 @@ describe 'VendingMachine' do
         expect(@vm.valid_coin?(Coin::NICKEL)).to be true
       end
     end
+
+    context 'when it is an invalid coin' do
+      it 'returns FALSE' do
+        @vm = VendingMachine.new
+        expect(@vm.valid_coin?(Coin::PENNY)).to be false
+      end
+    end
   end
 
 end
