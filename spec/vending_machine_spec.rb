@@ -18,6 +18,8 @@ describe 'VendingMachine' do
     context 'when it is a valid coin' do
       it 'returns TRUE' do
         expect(@vm.valid_coin?(Coin::NICKEL)).to be true
+        expect(@vm.valid_coin?(Coin::DIME)).to be true
+        expect(@vm.valid_coin?(Coin::QUARTER)).to be true
       end
     end
 
