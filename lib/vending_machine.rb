@@ -1,6 +1,6 @@
 class VendingMachine
 
-  attr_accessor :credits, :coin_return
+  attr_accessor :credits, :coin_return, :product_bin
 
   def initialize
     @credits = 0
@@ -23,8 +23,12 @@ class VendingMachine
     coin_return
   end
 
-  def check_product_bin
+  def select_item(item)
+    @product_bin = item
+  end
 
+  def check_product_bin
+    product_bin
   end
 
   def return_coins

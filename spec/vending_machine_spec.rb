@@ -116,11 +116,10 @@ describe 'VendingMachine' do
 
   describe '.select_item' do
     context 'when an item is selected' do
-      it 'is placed in the bin, and thank you is displayed' do
+      it 'is placed in the bin' do
         item = Item::CHIPS
         @vm.select_item item
         expect(@vm.check_product_bin).to eql item
-        expect(@vm.get_display).to eql 'THANK YOU'
       end
     end
   end
