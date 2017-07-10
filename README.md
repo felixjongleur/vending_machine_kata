@@ -1,0 +1,1 @@
+To run, simply execute 'rspec spec' from a terminal navigated to the vending_machine_kata folder
