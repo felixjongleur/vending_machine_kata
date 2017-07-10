@@ -49,7 +49,7 @@ describe 'VendingMachine' do
   describe '.get_value' do
     context 'when a coin is examined' do
       it 'returns the coins value' do
-        expect(@vm.get_value(Coin::PENNY)).to eql 0
+        expect(@vm.get_value(Coin::PENNY)).to eql 1
         expect(@vm.get_value(Coin::NICKEL)).to eql 5
         expect(@vm.get_value(Coin::DIME)).to eql 10
         expect(@vm.get_value(Coin::QUARTER)).to eql 25
@@ -70,9 +70,10 @@ describe 'VendingMachine' do
     end
 
     context 'when an invalid coin has been inserted' do
-      it 'does not add its value to the current credits' do
+      it 'does not add its value to the current credits and it is placed in the coin return' do
         @vm.insert_coin Coin::PENNY
         expect(@vm.get_credits).to eql 0
+        expect(@vm.check_coin_return).to eql 1
       end
     end
   end

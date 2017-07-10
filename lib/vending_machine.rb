@@ -1,9 +1,10 @@
 class VendingMachine
 
-  attr_accessor :credits
+  attr_accessor :credits, :coin_return
 
   def initialize
     @credits = 0
+    @coin_return = 0
   end
 
   def get_display
@@ -19,11 +20,15 @@ class VendingMachine
   end
 
   def check_coin_return
-    0
+    coin_return
   end
 
   def insert_coin(coin)
-    @credits += get_value(coin)
+    if valid_coin? coin
+      @credits += get_value(coin)
+    else
+      @coin_return += get_value(coin)
+    end
   end
 
   def get_value(coin)
@@ -34,8 +39,10 @@ class VendingMachine
         return 10
       when 4
         return 25
+      when 2
+        return 1
       else
-        0
+        return 0
     end
   end
 
