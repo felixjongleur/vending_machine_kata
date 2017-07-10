@@ -46,6 +46,18 @@ describe 'VendingMachine' do
     end
   end
 
+  describe '.return_coins' do
+    context 'when the return coins button is pressed' do
+      it 'places any inserted coins into the coin return and resets the display' do
+        @vm.insert_coin Coin::NICKEL
+        @vm.insert_coin Coin::DIME
+        @vm.return_coins
+        expect(@vm.check_coin_return).to eql 15
+        expect(@vm.get_credits).to eql 0
+      end
+    end
+  end
+
   describe '.get_value' do
     context 'when a coin is examined' do
       it 'returns the coins value' do
