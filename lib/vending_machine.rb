@@ -1,6 +1,7 @@
 class VendingMachine
 
   attr_accessor :credits, :coin_return, :product_bin, :item_selected, :insufficient_funds
+  attr_accessor :inventory
 
   def initialize
     @credits = 0
@@ -40,6 +41,8 @@ class VendingMachine
   end
 
   def select_item(item)
+
+
     @item_selected = item
     if credits < item.price
       @insufficient_funds = true
