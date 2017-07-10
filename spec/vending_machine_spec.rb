@@ -12,6 +12,22 @@ describe 'VendingMachine' do
         expect(@vm.get_display).to eql 'INSERT COINS'
       end
     end
+
+    context 'when coins have been inserted' do
+      it 'returns the current value of credits' do
+        @vm.insert_coin Coin::NICKEL
+        expect(@vm.get_display).to eql '$0.05'
+        @vm.insert_coin Coin::DIME
+        expect(@vm.get_display).to eql '$0.15'
+        @vm.insert_coin Coin::QUARTER
+        @vm.insert_coin Coin::QUARTER
+        @vm.insert_coin Coin::QUARTER
+        @vm.insert_coin Coin::DIME
+        expect(@vm.get_display).to eql '$1.00'
+        @vm.insert_coin Coin::QUARTER
+        expect(@vm.get_display).to eql '$1.25'
+      end
+    end
   end
 
   describe '.get_credits' do
@@ -25,6 +41,7 @@ describe 'VendingMachine' do
   describe '.get_value' do
     context 'when a coin is examined' do
       it 'returns the coins value' do
+        expect(@vm.get_value(Coin::PENNY)).to eql 0
         expect(@vm.get_value(Coin::NICKEL)).to eql 5
         expect(@vm.get_value(Coin::DIME)).to eql 10
         expect(@vm.get_value(Coin::QUARTER)).to eql 25
@@ -41,6 +58,13 @@ describe 'VendingMachine' do
         expect(@vm.get_credits).to eql 15
         @vm.insert_coin Coin::QUARTER
         expect(@vm.get_credits).to eql 40
+      end
+    end
+
+    context 'when an invalid coin has been inserted' do
+      it 'does not add its value to the current credits' do
+        @vm.insert_coin Coin::PENNY
+        expect(@vm.get_credits).to eql 0
       end
     end
   end

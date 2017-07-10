@@ -7,7 +7,11 @@ class VendingMachine
   end
 
   def get_display
-    'INSERT COINS'
+    if @credits == 0
+      return 'INSERT COINS'
+    end
+
+    '$%.2f' % (@credits.to_i/100.0)
   end
 
   def get_credits
