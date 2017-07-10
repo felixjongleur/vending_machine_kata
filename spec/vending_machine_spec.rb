@@ -85,11 +85,21 @@ describe 'VendingMachine' do
       end
     end
 
-    context 'when the item is in stock' do
-      it 'returns a value of true' do
+    # context 'when the item is in stock' do
+    #   it 'returns a value of true' do
+    #     item = Item.new('Candy', 65)
+    #     @vm.add_to_inventory item
+    #     expect(@vm.check_stock item).to be true
+    #   end
+    # end
+  end
+
+  describe '.add_to_inventory' do
+    context 'when an item is added to the inventory' do
+      it 'adds it to the inventory' do
         item = Item.new('Candy', 65)
         @vm.add_to_inventory item
-        expect(@vm.check_stock item).to be true
+        expect(@vm.inventory.has_key? 'Candy').to be true
       end
     end
   end

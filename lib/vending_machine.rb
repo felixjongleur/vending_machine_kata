@@ -6,6 +6,7 @@ class VendingMachine
   def initialize
     @credits = 0
     @coin_return = 0
+    @inventory = {}
   end
 
   def get_display
@@ -38,6 +39,10 @@ class VendingMachine
 
   def check_coin_return
     coin_return
+  end
+
+  def add_to_inventory(item)
+
   end
 
   def check_stock(item)
