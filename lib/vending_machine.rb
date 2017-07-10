@@ -10,11 +10,13 @@ class VendingMachine
   def get_display
     if insufficient_funds
       @insufficient_funds = false
-      return '$0.50'
+      display = '$%.2f' % (item_selected.price.to_i/100.0)
+      @item_selected = nil
+      return display
     end
 
     if item_selected
-      @item_selected = false
+      @item_selected = nil
       return 'THANK YOU'
     end
 
@@ -34,10 +36,10 @@ class VendingMachine
   end
 
   def select_item(item)
+    @item_selected = item
     if credits < item.price
       @insufficient_funds = true
     else
-      @item_selected = true
       @product_bin = item
       @coin_return += (credits - item.price)
       @credits = 0
