@@ -1,15 +1,17 @@
 class VendingMachine
 
+  attr_accessor :credits
+
   def get_display
     'INSERT COINS'
   end
 
   def get_credits
-    0
+    credits
   end
 
   def insert_coin(coin)
-
+    @credits = 5
   end
 
   def valid_coin?(coin)

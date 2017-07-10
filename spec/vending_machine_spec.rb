@@ -26,7 +26,7 @@ describe 'VendingMachine' do
     context 'when a valid coin has been inserted' do
       it 'adds its value to the current credits' do
         @vm.insert_coin Coin::NICKEL
-        expect(@vm.get_credits).to eql Money(0.05)
+        expect(@vm.get_credits).to eql 5
       end
     end
   end
