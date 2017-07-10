@@ -46,14 +46,6 @@ describe 'VendingMachine' do
     end
   end
 
-  describe '.check_product_bin' do
-    context 'when no product has been purchased' do
-      it 'returns nothing' do
-        expect(@vm.check_product_bin).to eql nil
-      end
-    end
-  end
-
   describe '.return_coins' do
     context 'when the return coins button is pressed' do
       it 'places any inserted coins into the coin return and resets the display' do
@@ -110,6 +102,25 @@ describe 'VendingMachine' do
     context 'when it is an invalid coin' do
       it 'returns FALSE' do
         expect(@vm.valid_coin?(Coin::PENNY)).to be false
+      end
+    end
+  end
+
+  describe '.check_product_bin' do
+    context 'when no product has been purchased' do
+      it 'returns nothing' do
+        expect(@vm.check_product_bin).to eql nil
+      end
+    end
+  end
+
+  describe '.select_item' do
+    context 'when an item is selected' do
+      it 'is placed in the bin, and thank you is displayed' do
+        item = Item::CHIPS
+        @vm.select_item item
+        expect(@vm.check_product_bin).to eql item
+        expect(@vm.get_display).to eql 'THANK YOU'
       end
     end
   end
