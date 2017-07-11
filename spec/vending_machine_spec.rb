@@ -31,17 +31,17 @@ describe 'VendingMachine' do
 
     context 'when an item is selected with no credits' do
       it 'the display shows the items PRICE once, then INSERT COINS' do
-        item = Item.new('Pop', 100)
+        item = Item.new('Pop')
         @vm.add_to_inventory item
         @vm.select_item item
         expect(@vm.get_display).to eql '$1.00'
         expect(@vm.get_display).to eql 'INSERT COINS'
-        item = Item.new('Chips', 50)
+        item = Item.new('Chips')
         @vm.add_to_inventory item
         @vm.select_item item
         expect(@vm.get_display).to eql '$0.50'
         expect(@vm.get_display).to eql 'INSERT COINS'
-        item = Item.new('Candy', 65)
+        item = Item.new('Candy')
         @vm.add_to_inventory item
         @vm.select_item item
         expect(@vm.get_display).to eql '$0.65'
@@ -52,7 +52,7 @@ describe 'VendingMachine' do
     context 'when an item is selected with some, but not enough credits' do
       it 'the display shows the items PRICE once, then the current value of credits' do
         @vm.insert_coin Coin::QUARTER
-        item = Item.new('Chips', 50)
+        item = Item.new('Chips')
         @vm.add_to_inventory item
         @vm.select_item item
         expect(@vm.get_display).to eql '$0.50'
@@ -64,7 +64,7 @@ describe 'VendingMachine' do
       it 'the display says THANK YOU, only the next time its checked' do
         @vm.insert_coin Coin::QUARTER
         @vm.insert_coin Coin::QUARTER
-        item = Item.new('Chips', 50)
+        item = Item.new('Chips')
         @vm.add_to_inventory item
         @vm.select_item item
         expect(@vm.get_display).to eql 'THANK YOU'
@@ -74,7 +74,7 @@ describe 'VendingMachine' do
 
     context 'when no credits and an item is selected and there are non of it left' do
       it 'the display says SOLD OUT, then subsequently INSERT COINS' do
-        item = Item.new('Chips', 50)
+        item = Item.new('Chips')
         @vm.select_item item
         expect(@vm.get_display).to eql 'SOLD OUT'
         expect(@vm.get_display).to eql 'INSERT COINS'
@@ -85,14 +85,14 @@ describe 'VendingMachine' do
   describe '.check_stock' do
     context 'when the item is not in stock' do
       it 'returns a value of false' do
-        item = Item.new('Candy', 65)
+        item = Item.new('Candy')
         expect(@vm.check_stock item).to be false
       end
     end
 
     context 'when the item is in stock' do
       it 'returns a value of true' do
-        item = Item.new('Candy', 65)
+        item = Item.new('Candy')
         @vm.add_to_inventory item
         expect(@vm.check_stock item).to be true
       end
@@ -102,7 +102,7 @@ describe 'VendingMachine' do
   describe '.add_to_inventory' do
     context 'when an item is added to the inventory' do
       it 'adds it to the inventory' do
-        item = Item.new('Candy', 65)
+        item = Item.new('Candy')
         @vm.add_to_inventory item
         expect(@vm.inventory.has_key? 'Candy').to be true
       end
@@ -110,8 +110,8 @@ describe 'VendingMachine' do
 
     context 'when multiple of the same item is added to the inventory' do
       it 'adds both to the inventory' do
-        item1 = Item.new('Candy', 65)
-        item2 = Item.new('Candy', 65)
+        item1 = Item.new('Candy')
+        item2 = Item.new('Candy')
         @vm.add_to_inventory item1
         @vm.add_to_inventory item2
         expect(@vm.inventory['Candy']).to eq [item1, item2]
@@ -120,10 +120,10 @@ describe 'VendingMachine' do
 
     context 'when multiple of different items are added to the inventory' do
       it 'adds all items to the inventory' do
-        item1 = Item.new('Candy', 65)
-        item2 = Item.new('Candy', 65)
-        item3 = Item.new('Pop', 100)
-        item4 = Item.new('Pop', 100)
+        item1 = Item.new('Candy')
+        item2 = Item.new('Candy')
+        item3 = Item.new('Pop')
+        item4 = Item.new('Pop')
         @vm.add_to_inventory item1
         @vm.add_to_inventory item2
         @vm.add_to_inventory item3
@@ -223,7 +223,7 @@ describe 'VendingMachine' do
       it 'is placed in the bin and current credits are set to 0' do
         @vm.insert_coin Coin::QUARTER
         @vm.insert_coin Coin::QUARTER
-        item = Item.new('Chips', 50)
+        item = Item.new('Chips')
         @vm.add_to_inventory item
         @vm.select_item item
         expect(@vm.check_product_bin).to eql item
@@ -236,7 +236,7 @@ describe 'VendingMachine' do
         @vm.insert_coin Coin::QUARTER
         @vm.insert_coin Coin::QUARTER
         @vm.insert_coin Coin::QUARTER
-        item = Item.new('Chips', 50)
+        item = Item.new('Chips')
         @vm.add_to_inventory item
         @vm.select_item item
         expect(@vm.check_coin_return).to eql 25

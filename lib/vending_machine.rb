@@ -1,12 +1,24 @@
 class VendingMachine
 
   attr_accessor :credits, :coin_return, :product_bin, :item_selected, :insufficient_funds
-  attr_accessor :inventory, :item_sold_out
+  attr_accessor :inventory, :item_sold_out, :prices
 
   def initialize
     @credits = 0
     @coin_return = 0
     @inventory = {}
+    @prices = {}
+    set_price 'Pop', 100
+    set_price 'Chips', 50
+    set_price 'Candy', 65
+  end
+
+  def set_price(name, price)
+    @prices[name] = price
+  end
+
+  def get_price(name)
+    @prices[name]
   end
 
   def get_display
@@ -17,7 +29,7 @@ class VendingMachine
 
     if insufficient_funds
       @insufficient_funds = false
-      display = format_to_money item_selected.price
+      display = format_to_money get_price(item_selected.name)
       @item_selected = nil
       return display
     end
@@ -68,11 +80,11 @@ class VendingMachine
     end
 
     @item_selected = item
-    if credits < item.price
+    if credits < get_price(item.name)
       @insufficient_funds = true
     else
       @product_bin = item
-      @coin_return += (credits - item.price)
+      @coin_return += (credits - get_price(item.name))
       @credits = 0
     end
   end
