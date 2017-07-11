@@ -1,7 +1,7 @@
 class VendingMachine
 
   attr_accessor :credits, :coin_return, :product_bin, :item_selected, :insufficient_funds
-  attr_accessor :inventory
+  attr_accessor :inventory, :item_sold_out
 
   def initialize
     @credits = 0
@@ -10,6 +10,11 @@ class VendingMachine
   end
 
   def get_display
+    if item_sold_out
+      @item_sold_out = false
+      return 'SOLD OUT'
+    end
+
     if insufficient_funds
       @insufficient_funds = false
       display = format_to_money item_selected.price
@@ -57,7 +62,10 @@ class VendingMachine
   end
 
   def select_item(item)
-
+    unless check_stock item
+      @item_sold_out = true
+      return
+    end
 
     @item_selected = item
     if credits < item.price

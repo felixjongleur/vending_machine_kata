@@ -67,14 +67,14 @@ describe 'VendingMachine' do
       end
     end
 
-    # context 'when no credits and an item is selected and there are non of it left' do
-    #   it 'the display says SOLD OUT, then subsequently INSERT COINS' do
-    #     item = Item.new('Chips', 50)
-    #     @vm.select_item item
-    #     expect(@vm.get_display).to eql 'SOLD OUT'
-    #     expect(@vm.get_display).to eql 'INSERT COINS'
-    #   end
-    # end
+    context 'when no credits and an item is selected and there are non of it left' do
+      it 'the display says SOLD OUT, then subsequently INSERT COINS' do
+        item = Item.new('Chips', 50)
+        @vm.select_item item
+        expect(@vm.get_display).to eql 'SOLD OUT'
+        expect(@vm.get_display).to eql 'INSERT COINS'
+      end
+    end
   end
 
   describe '.check_stock' do
