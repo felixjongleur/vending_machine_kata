@@ -32,14 +32,17 @@ describe 'VendingMachine' do
     context 'when an item is selected with no credits' do
       it 'the display shows the items PRICE once, then INSERT COINS' do
         item = Item.new('Pop', 100)
+        @vm.add_to_inventory item
         @vm.select_item item
         expect(@vm.get_display).to eql '$1.00'
         expect(@vm.get_display).to eql 'INSERT COINS'
         item = Item.new('Chips', 50)
+        @vm.add_to_inventory item
         @vm.select_item item
         expect(@vm.get_display).to eql '$0.50'
         expect(@vm.get_display).to eql 'INSERT COINS'
         item = Item.new('Candy', 65)
+        @vm.add_to_inventory item
         @vm.select_item item
         expect(@vm.get_display).to eql '$0.65'
         expect(@vm.get_display).to eql 'INSERT COINS'
@@ -50,6 +53,7 @@ describe 'VendingMachine' do
       it 'the display shows the items PRICE once, then the current value of credits' do
         @vm.insert_coin Coin::QUARTER
         item = Item.new('Chips', 50)
+        @vm.add_to_inventory item
         @vm.select_item item
         expect(@vm.get_display).to eql '$0.50'
         expect(@vm.get_display).to eql '$0.25'
@@ -61,6 +65,7 @@ describe 'VendingMachine' do
         @vm.insert_coin Coin::QUARTER
         @vm.insert_coin Coin::QUARTER
         item = Item.new('Chips', 50)
+        @vm.add_to_inventory item
         @vm.select_item item
         expect(@vm.get_display).to eql 'THANK YOU'
         expect(@vm.get_display).to eql 'INSERT COINS'
@@ -219,6 +224,7 @@ describe 'VendingMachine' do
         @vm.insert_coin Coin::QUARTER
         @vm.insert_coin Coin::QUARTER
         item = Item.new('Chips', 50)
+        @vm.add_to_inventory item
         @vm.select_item item
         expect(@vm.check_product_bin).to eql item
         expect(@vm.get_credits).to eql 0
@@ -231,6 +237,7 @@ describe 'VendingMachine' do
         @vm.insert_coin Coin::QUARTER
         @vm.insert_coin Coin::QUARTER
         item = Item.new('Chips', 50)
+        @vm.add_to_inventory item
         @vm.select_item item
         expect(@vm.check_coin_return).to eql 25
       end
