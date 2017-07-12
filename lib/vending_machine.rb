@@ -29,7 +29,7 @@ class VendingMachine
 
     if insufficient_funds
       @insufficient_funds = false
-      display = format_to_money get_price(item_selected.name)
+      display = format_to_money get_price(item_selected)
       @item_selected = nil
       return display
     end
@@ -59,15 +59,15 @@ class VendingMachine
   end
 
   def add_to_inventory(item)
-    if @inventory.has_key? item.name
-      @inventory[item.name].push item
+    if @inventory.has_key? item
+      @inventory[item] += 1
     else
-      @inventory[item.name] = [item]
+      @inventory[item] = 1
     end
   end
 
   def check_stock(item)
-    if @inventory.has_key? item.name
+    if @inventory.has_key? item
       return true
     end
     false
@@ -80,11 +80,11 @@ class VendingMachine
     end
 
     @item_selected = item
-    if credits < get_price(item.name)
+    if credits < get_price(item)
       @insufficient_funds = true
     else
       @product_bin = item
-      @coin_return += (credits - get_price(item.name))
+      @coin_return += (credits - get_price(item))
       @credits = 0
     end
   end
