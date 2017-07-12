@@ -19,7 +19,11 @@ class VendingMachine
   end
 
   def get_menu(menu)
-    @menus[menu]
+    menu_display = "-- #{menu} --\n\n"
+    @menus[menu].each do |choice|
+      menu_display += "#{choice}\n"
+    end
+    menu_display
   end
 
   def set_price(name, price)

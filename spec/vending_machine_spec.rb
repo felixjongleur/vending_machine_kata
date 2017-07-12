@@ -282,13 +282,21 @@ describe 'VendingMachine' do
   describe '.get_menu' do
     context 'when the main menu is called' do
       it 'returns appropriately' do
-        expect(@vm.get_menu 'MAIN').to eq "MAIN\n\n1) INSERT COIN\n2) SELECT ITEM\n3) TAKE FROM BIN\n4) LEAVE\n"
+        expect(@vm.get_menu 'MAIN').to eq "-- MAIN --\n\n1) INSERT COIN\n2) SELECT ITEM\n3) TAKE FROM BIN\n4) LEAVE\n"
       end
     end
 
     context 'when the insert coin menu is called' do
       it 'returns appropriately' do
-        expect(@vm.get_menu 'INSERT COIN').to eq "INSERT COIN\n\n1) PENNY\n2) NICKEL\n3) DIME\n4) QUARTER\n"
+        expect(@vm.get_menu 'INSERT COIN').to eq "-- INSERT COIN --\n\n1) PENNY\n2) NICKEL\n3) DIME\n4) QUARTER\n"
+      end
+    end
+  end
+
+  describe '.get_current_menu' do
+    context 'when the vending machine is first turned on' do
+      it 'returns the main menu' do
+        expect(@vm.get_current_menu).to eq "-- MAIN --\n\n1) INSERT COIN\n2) SELECT ITEM\n3) TAKE FROM BIN\n4) LEAVE\n"
       end
     end
   end
