@@ -285,5 +285,11 @@ describe 'VendingMachine' do
         expect(@vm.get_menu 'main').to eq ['1) INSERT COIN', '2) SELECT ITEM', '3) TAKE FROM BIN', '4) LEAVE']
       end
     end
+
+    context 'when the insert coin menu is called' do
+      it 'returns appropriately' do
+        expect(@vm.get_menu 'insert coin').to eq ['1) PENNY', '2) NICKEL', '3) DIME', '4) QUARTER']
+      end
+    end
   end
 end
