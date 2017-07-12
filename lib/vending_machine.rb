@@ -14,7 +14,8 @@ class VendingMachine
     set_price 'Candy', 65
 
     @menus = {}
-    @menus['main'] = ['1) INSERT COIN', '2) SELECT ITEM', '3) TAKE FROM BIN', '4) LEAVE']
+    @menus['MAIN'] = ['1) INSERT COIN', '2) SELECT ITEM', '3) TAKE FROM BIN', '4) LEAVE']
+    @menus['INSERT COIN'] = ['1) PENNY', '2) NICKEL', '3) DIME', '4) QUARTER']
   end
 
   def get_menu(menu)
