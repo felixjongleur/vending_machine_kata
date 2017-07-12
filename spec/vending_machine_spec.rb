@@ -215,6 +215,7 @@ describe 'VendingMachine' do
         expect(@vm.get_credits).to eql 0
       end
     end
+
     context 'when multiple items have been selected' do
       it 'they are all placed in the bin' do
         @vm.add_to_inventory 'Chips'
@@ -239,6 +240,18 @@ describe 'VendingMachine' do
         @vm.add_to_inventory 'Chips'
         @vm.select_item 'Chips'
         expect(@vm.check_coin_return).to eql 25
+      end
+    end
+  end
+
+  describe '.pick_up_item' do
+    context 'when an item is in the bin' do
+      it 'can be picked up' do
+        @vm.insert_coin Coin::QUARTER
+        @vm.insert_coin Coin::QUARTER
+        @vm.add_to_inventory 'Chips'
+        @vm.select_item 'Chips'
+        expect(@vm.pick_up_item).to eq 'You have picked up Chips!'
       end
     end
   end
