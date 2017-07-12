@@ -1,7 +1,7 @@
 class VendingMachine
 
   attr_accessor :credits, :coin_return, :product_bin, :item_selected, :insufficient_funds
-  attr_accessor :inventory, :item_sold_out, :prices, :menus, :current_menu
+  attr_accessor :inventory, :item_sold_out, :prices, :menus, :current_menu, :running
 
   def initialize
     @credits = 0
@@ -17,13 +17,19 @@ class VendingMachine
     @menus = {}
     @menus['MAIN'] = ['1) INSERT COIN', '2) SELECT ITEM', '3) TAKE FROM BIN', '4) TURN OFF']
     @menus['INSERT COIN'] = ['1) PENNY', '2) NICKEL', '3) DIME', '4) QUARTER']
+
+    @running = true
   end
 
-  # def process_input(input)
-  #   if current_menu == 'MAIN'
-  #
-  #   end
-  # end
+  def is_running?
+    running
+  end
+
+  def process_input(input)
+    if current_menu == 'MAIN'
+      @running = false
+    end
+  end
 
   def get_current_menu
     get_menu current_menu
