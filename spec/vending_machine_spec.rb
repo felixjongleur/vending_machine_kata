@@ -246,12 +246,35 @@ describe 'VendingMachine' do
 
   describe '.pick_up_item' do
     context 'when an item is in the bin' do
-      it 'can be picked up' do
+      it 'says it has been picked up' do
         @vm.insert_coin Coin::QUARTER
         @vm.insert_coin Coin::QUARTER
         @vm.add_to_inventory 'Chips'
         @vm.select_item 'Chips'
         expect(@vm.pick_up_item).to eq 'You have picked up Chips!'
+      end
+    end
+
+    context 'when multiple items are in the bin' do
+      it ' says they have been picked up' do
+        @vm.add_to_inventory 'Chips'
+        @vm.add_to_inventory 'Pop'
+        @vm.insert_coin Coin::QUARTER
+        @vm.insert_coin Coin::QUARTER
+        @vm.insert_coin Coin::QUARTER
+        @vm.insert_coin Coin::QUARTER
+        @vm.select_item 'Pop'
+        @vm.insert_coin Coin::QUARTER
+        @vm.insert_coin Coin::QUARTER
+        @vm.select_item 'Chips'
+        expect(@vm.pick_up_item).to eq 'You have picked up Chips!'
+        expect(@vm.pick_up_item).to eq 'You have picked up Pop!'
+      end
+    end
+
+    context 'when no items are in the bin' do
+      it 'says you can not pick up nothing!' do
+        expect(@vm.pick_up_item).to eq 'You can not pick up nothing!'
       end
     end
   end
