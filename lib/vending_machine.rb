@@ -98,6 +98,9 @@ class VendingMachine
   end
 
   def pick_up_item
+    if @product_bin.empty?
+      return 'You can not pick up nothing!'
+    end
     "You have picked up #{@product_bin.pop}!"
   end
 
