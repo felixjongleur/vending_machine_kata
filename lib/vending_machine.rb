@@ -68,7 +68,9 @@ class VendingMachine
 
   def check_stock(item)
     if @inventory.has_key? item
-      return true
+      if @inventory[item] > 0
+        return true
+      end
     end
     false
   end
@@ -84,6 +86,7 @@ class VendingMachine
       @insufficient_funds = true
     else
       @product_bin = item
+      @inventory[item] -= 1
       @coin_return += (credits - get_price(item))
       @credits = 0
     end
