@@ -1,7 +1,7 @@
 class VendingMachine
 
   attr_accessor :credits, :coin_return, :product_bin, :item_selected, :insufficient_funds
-  attr_accessor :inventory, :item_sold_out, :prices
+  attr_accessor :inventory, :item_sold_out, :prices, :menus
 
   def initialize
     @credits = 0
@@ -12,6 +12,13 @@ class VendingMachine
     set_price 'Pop', 100
     set_price 'Chips', 50
     set_price 'Candy', 65
+
+    @menus = {}
+    @menus['main'] = ['1) INSERT COIN', '2) SELECT ITEM', '3) TAKE FROM BIN', '4) LEAVE']
+  end
+
+  def get_menu(menu)
+    @menus[menu]
   end
 
   def set_price(name, price)
