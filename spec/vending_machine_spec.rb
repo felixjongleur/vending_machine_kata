@@ -214,8 +214,23 @@ describe 'VendingMachine' do
         expect(@vm.check_stock 'Chips').to eql false
         expect(@vm.get_credits).to eql 0
       end
-
     end
+    context 'when multiple items have been selected' do
+      it 'they are all placed in the bin' do
+        @vm.add_to_inventory 'Chips'
+        @vm.add_to_inventory 'Pop'
+        @vm.insert_coin Coin::QUARTER
+        @vm.insert_coin Coin::QUARTER
+        @vm.insert_coin Coin::QUARTER
+        @vm.insert_coin Coin::QUARTER
+        @vm.select_item 'Pop'
+        @vm.insert_coin Coin::QUARTER
+        @vm.insert_coin Coin::QUARTER
+        @vm.select_item 'Chips'
+        expect(@vm.check_product_bin).to eql %w(Pop Chips)
+      end
+    end
+
     context 'when an item is selected' do
       it 'any remainder credits are placed in the coin return' do
         @vm.insert_coin Coin::QUARTER
