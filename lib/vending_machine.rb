@@ -27,7 +27,14 @@ class VendingMachine
 
   def process_input(input)
     if current_menu == 'MAIN'
-      @running = false
+      case input
+        when 1
+          @current_menu = 'INSERT COIN'
+        when 4
+          @running = false
+        else
+          # type code here
+      end
     end
   end
 
