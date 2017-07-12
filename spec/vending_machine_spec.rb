@@ -205,12 +205,13 @@ describe 'VendingMachine' do
 
   describe '.select_item' do
     context 'when an item is selected' do
-      it 'is placed in the bin and current credits are set to 0' do
+      it 'is placed in the bin, current credits are set to 0, and inventory is reduced' do
         @vm.insert_coin Coin::QUARTER
         @vm.insert_coin Coin::QUARTER
         @vm.add_to_inventory 'Chips'
         @vm.select_item 'Chips'
         expect(@vm.check_product_bin).to eql 'Chips'
+        expect(@vm.check_stock 'Chips').to eql false
         expect(@vm.get_credits).to eql 0
       end
 
