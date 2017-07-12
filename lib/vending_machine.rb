@@ -97,6 +97,10 @@ class VendingMachine
     product_bin
   end
 
+  def pick_up_item
+    "You have picked up #{@product_bin.pop}!"
+  end
+
   def return_coins
     @coin_return += credits
     @credits = 0
