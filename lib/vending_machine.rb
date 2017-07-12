@@ -19,6 +19,12 @@ class VendingMachine
     @menus['INSERT COIN'] = ['1) PENNY', '2) NICKEL', '3) DIME', '4) QUARTER']
   end
 
+  # def process_input(input)
+  #   if current_menu == 'MAIN'
+  #
+  #   end
+  # end
+
   def get_current_menu
     get_menu current_menu
   end

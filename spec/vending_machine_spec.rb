@@ -301,11 +301,19 @@ describe 'VendingMachine' do
     end
   end
 
-  describe '.process_input' do
-    context 'when on the main menu and turn off is selected' do
-      it 'turns off' do
-        @vm.process_input 4
-        expect(@vm.running).to be false
+  # describe '.process_input' do
+  #   context 'when on the main menu and turn off is selected' do
+  #     it 'turns off' do
+  #       @vm.process_input 4
+  #       expect(@vm.is_running?).to be false
+  #     end
+  #   end
+  # end
+
+  describe '.is_running?' do
+    context 'when the vending machine is created' do
+      it 'is turned on' do
+        expect(@vm.is_running?).to be true
       end
     end
   end
