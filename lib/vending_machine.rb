@@ -6,6 +6,7 @@ class VendingMachine
   def initialize
     @credits = 0
     @coin_return = 0
+    @product_bin = []
     @inventory = {}
     @prices = {}
     set_price 'Pop', 100
@@ -85,7 +86,7 @@ class VendingMachine
     if credits < get_price(item)
       @insufficient_funds = true
     else
-      @product_bin = item
+      @product_bin.push item
       @inventory[item] -= 1
       @coin_return += (credits - get_price(item))
       @credits = 0
