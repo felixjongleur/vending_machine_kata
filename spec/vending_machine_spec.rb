@@ -291,6 +291,12 @@ describe 'VendingMachine' do
         expect(@vm.get_menu 'INSERT COIN').to eq "-- INSERT COIN --\n\n1) PENNY\n2) NICKEL\n3) DIME\n4) QUARTER\n"
       end
     end
+
+    context 'when the select product menu is called, and no products are available' do
+      it 'returns appropriately' do
+        expect(@vm.get_menu 'SELECT PRODUCT').to eq "-- SELECT PRODUCT --\n\nNO PRODUCTS AVAILABLE!\n"
+      end
+    end
   end
 
   describe '.get_current_menu' do

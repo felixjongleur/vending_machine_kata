@@ -38,11 +38,18 @@ class VendingMachine
     end
   end
 
+  def generate_product_menu
+    @menus['SELECT PRODUCT'] = ['NO PRODUCTS AVAILABLE!']
+  end
+
   def get_current_menu
     get_menu current_menu
   end
 
   def get_menu(menu)
+    if menu == 'SELECT PRODUCT'
+      generate_product_menu
+    end
     menu_display = "-- #{menu} --\n\n"
     @menus[menu].each do |choice|
       menu_display += "#{choice}\n"
