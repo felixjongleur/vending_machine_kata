@@ -308,17 +308,24 @@ describe 'VendingMachine' do
   end
 
   describe '.process_input' do
-    context 'when on the main menu and turn off is selected' do
-      it 'turns off' do
-        @vm.process_input 4
-        expect(@vm.is_running?).to be false
-      end
-    end
-
     context 'when on the main menu and insert coins is selected' do
       it 'sets the current menu to insert coin' do
         @vm.process_input 1
         expect(@vm.get_current_menu).to eq "-- INSERT COIN --\n\n1) PENNY\n2) NICKEL\n3) DIME\n4) QUARTER\n"
+      end
+    end
+
+    context 'when on the main menu and select product is selected' do
+      it 'sets the current menu to select product' do
+        @vm.process_input 2
+        expect(@vm.get_current_menu).to eq "-- SELECT PRODUCT --\n\nNO PRODUCTS AVAILABLE!\n"
+      end
+    end
+
+    context 'when on the main menu and turn off is selected' do
+      it 'turns off' do
+        @vm.process_input 4
+        expect(@vm.is_running?).to be false
       end
     end
   end
