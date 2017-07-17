@@ -303,7 +303,7 @@ describe 'VendingMachine' do
         @vm.add_to_inventory 'Chips'
         @vm.add_to_inventory 'Pop'
         @vm.add_to_inventory 'Candy'
-        expect(@vm.get_menu 'SELECT PRODUCT').to eq "-- SELECT PRODUCT --\n\n1) CHIPS\n2) POP\n3)CANDY\n"
+        expect(@vm.get_menu 'SELECT PRODUCT').to eq "-- SELECT PRODUCT --\n\n1) CHIPS\n2) POP\n3) CANDY\n"
       end
     end
   end

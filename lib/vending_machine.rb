@@ -41,7 +41,17 @@ class VendingMachine
   end
 
   def generate_product_menu
-    @menus['SELECT PRODUCT'] = ['NO PRODUCTS AVAILABLE!']
+    if @inventory.empty?
+      menu = ['NO PRODUCTS AVAILABLE!']
+    else
+      menu = []
+      item_number = 1
+      @inventory.each_key do |product|
+        menu << "#{item_number}) #{product.upcase}"
+        item_number += 1
+      end
+    end
+    @menus['SELECT PRODUCT'] = menu
   end
 
   def get_current_menu
