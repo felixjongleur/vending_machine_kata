@@ -30,6 +30,8 @@ class VendingMachine
       case input
         when 1
           @current_menu = 'INSERT COIN'
+        when 2
+          @current_menu = 'SELECT PRODUCT'
         when 4
           @running = false
         else
