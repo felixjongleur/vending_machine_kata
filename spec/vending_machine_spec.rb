@@ -331,6 +331,13 @@ describe 'VendingMachine' do
       end
     end
 
+    context 'when on the main menu and get from bin is called with nothing in it' do
+      it 'returns an appropriate message and stays on the main menu' do
+        expect(@vm.process_input 3).to eq 'THE BIN IS EMPTY!'
+        expect(@vm.get_current_menu).to eq "-- MAIN --\n\n1) INSERT COIN\n2) SELECT ITEM\n3) TAKE FROM BIN\n4) TURN OFF\n"
+      end
+    end
+
     context 'when on the main menu and turn off is selected' do
       it 'turns off' do
         @vm.process_input 4
