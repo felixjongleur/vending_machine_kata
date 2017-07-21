@@ -291,7 +291,7 @@ describe 'VendingMachine' do
         @vm.add_to_inventory 'Chips'
         @vm.add_to_inventory 'Pop'
         @vm.add_to_inventory 'Candy'
-        expect(@vm.get_menu 'SELECT PRODUCT').to eq "-- SELECT PRODUCT --\n\n1) CHIPS\n2) POP\n3) CANDY\n"
+        expect(@vm.get_menu 'SELECT PRODUCT').to eq "-- SELECT PRODUCT --\n\n1) CHIPS\n2) POP\n3) CANDY\nn4) BACK\n"
       end
     end
   end
@@ -399,6 +399,16 @@ describe 'VendingMachine' do
         expect(@vm.get_credits).to eq 15
         expect(@vm.process_input 4).to eq 'A quarter has been inserted!'
         expect(@vm.get_credits).to eq 40
+      end
+    end
+  end
+
+  describe '.process_input for the select product menu' do
+    context 'when on the insert coin menu and back is selected' do
+      it 'goes back to the main menu' do
+        @vm.process_input 2
+        @vm.process_input 4
+        expect(@vm.current_menu).to eq 'MAIN'
       end
     end
   end
