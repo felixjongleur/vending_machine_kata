@@ -32,6 +32,10 @@ class VendingMachine
           @current_menu = 'INSERT COIN'
         when 2
           @current_menu = 'SELECT PRODUCT'
+        when 3
+          if product_bin.empty?
+            return 'THE BIN IS EMPTY!'
+          end
         when 4
           @running = false
         else
