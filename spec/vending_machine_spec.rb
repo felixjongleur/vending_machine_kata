@@ -384,6 +384,7 @@ describe 'VendingMachine' do
 
     context 'when on the insert coin menu and penny is selected' do
       it 'places the coin in the coin return' do
+        @vm.process_input 1
         expect(@vm.process_input 1).to eq 'Pennies are not accepted!'
         expect(@vm.check_coin_return).to eq 'You get back 1 credits!'
       end

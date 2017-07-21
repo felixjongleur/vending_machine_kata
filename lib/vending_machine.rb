@@ -50,12 +50,16 @@ class VendingMachine
         case input
           when 1
             insert_coin Coin::PENNY
+            'Pennies are not accepted!'
           when 2
             insert_coin Coin::NICKEL
+            'A nickel has been inserted!'
           when 3
             insert_coin Coin::DIME
+            'A dime has been inserted!'
           when 4
             insert_coin Coin::QUARTER
+            'A quarter has been inserted!'
           when 5
             @current_menu = 'MAIN'
           else
