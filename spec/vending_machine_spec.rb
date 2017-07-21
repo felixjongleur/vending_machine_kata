@@ -304,7 +304,7 @@ describe 'VendingMachine' do
     end
   end
 
-  describe '.process_input' do
+  describe '.process_input for the main menu' do
     context 'when on the main menu and insert coins is selected' do
       it 'sets the current menu to insert coin' do
         @vm.process_input 1
@@ -339,6 +339,16 @@ describe 'VendingMachine' do
       it 'turns off' do
         @vm.process_input 4
         expect(@vm.is_running?).to be false
+      end
+    end
+  end
+
+  describe '.process_input for the insert coin menu' do
+    context 'when on the insert coin menu and penny is selected' do
+      it 'places the coin in the coin return' do
+        @vm.process_input 1
+        @vm.process_input 1
+        expect(@vm.check_coin_return).to eq 1
       end
     end
   end
