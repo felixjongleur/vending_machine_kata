@@ -270,7 +270,7 @@ describe 'VendingMachine' do
   describe '.get_menu' do
     context 'when the main menu is called' do
       it 'returns appropriately' do
-        expect(@vm.get_menu 'MAIN').to eq "-- MAIN --\n\n1) INSERT COIN\n2) SELECT ITEM\n3) TAKE FROM BIN\n4) TURN OFF\n"
+        expect(@vm.get_menu 'MAIN').to eq "-- MAIN --\n\n1) INSERT COIN\n2) SELECT ITEM\n3) TAKE FROM BIN\n4)RETURN COINS 5)TAKE FROM COIN RETURN 6) TURN OFF\n"
       end
     end
 
