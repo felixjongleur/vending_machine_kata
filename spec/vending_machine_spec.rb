@@ -130,7 +130,7 @@ describe 'VendingMachine' do
   describe '.check_coin_return' do
     context 'when no coins have been returned' do
       it 'returns a value of 0' do
-        expect(@vm.check_coin_return).to eql 0
+        expect(@vm.check_coin_return).to eql 'You get back 0 credits!'
       end
     end
   end
@@ -141,7 +141,7 @@ describe 'VendingMachine' do
         @vm.insert_coin Coin::NICKEL
         @vm.insert_coin Coin::DIME
         @vm.return_coins
-        expect(@vm.check_coin_return).to eql 15
+        expect(@vm.check_coin_return).to eql 'You get back 15 credits!'
         expect(@vm.get_credits).to eql 0
       end
     end
@@ -174,7 +174,7 @@ describe 'VendingMachine' do
       it 'does not add its value to the current credits and it is placed in the coin return' do
         @vm.insert_coin Coin::PENNY
         expect(@vm.get_credits).to eql 0
-        expect(@vm.check_coin_return).to eql 1
+        expect(@vm.check_coin_return).to eql 'You get back 1 credits!'
       end
     end
   end
@@ -239,7 +239,7 @@ describe 'VendingMachine' do
         @vm.insert_coin Coin::QUARTER
         @vm.add_to_inventory 'Chips'
         @vm.select_item 'Chips'
-        expect(@vm.check_coin_return).to eql 25
+        expect(@vm.check_coin_return).to eql 'You get back 25 credits!'
       end
     end
   end
@@ -337,7 +337,7 @@ describe 'VendingMachine' do
 
     context 'when on the main menu and get from coin return is called with nothing in it' do
       it 'returns an appropriate message and stays on the main menu' do
-        expect(@vm.process_input 4).to eq 0
+        expect(@vm.process_input 5).to eq 'You get back 0 credits!'
         expect(@vm.current_menu).to eq 'MAIN'
       end
     end
@@ -346,14 +346,21 @@ describe 'VendingMachine' do
       it 'returns an appropriate message and stays on the main menu' do
         @vm.insert_coin Coin::NICKEL
         @vm.return_coins
-        expect(@vm.process_input 4).to eq 5
+        expect(@vm.process_input 5).to eq 'You get back 5 credits!'
         @vm.insert_coin Coin::DIME
         @vm.return_coins
-        expect(@vm.process_input 4).to eq 10
+        expect(@vm.process_input 5).to eq 'You get back 10 credits!'
         @vm.insert_coin Coin::QUARTER
         @vm.return_coins
-        expect(@vm.process_input 4).to eq 25
-        expect(@vm.process_input 4).to eq 0
+        expect(@vm.process_input 5).to eq 'You get back 25 credits!'
+        expect(@vm.process_input 5).to eq 'You get back 0 credits!'
+        expect(@vm.current_menu).to eq 'MAIN'
+      end
+    end
+
+    context 'when on the main menu and return coins is called ' do
+      it 'returns an appropriate message and stays on the main menu' do
+        expect(@vm.process_input 5).to eq 'You get back 0 credits!'
         expect(@vm.current_menu).to eq 'MAIN'
       end
     end
@@ -378,8 +385,7 @@ describe 'VendingMachine' do
     context 'when on the insert coin menu and penny is selected' do
       it 'places the coin in the coin return' do
         @vm.process_input 1
-        @vm.process_input 1
-        expect(@vm.check_coin_return).to eq 1
+        expect(@vm.check_coin_return).to eq 'You get back 1 credits!'
       end
     end
 
