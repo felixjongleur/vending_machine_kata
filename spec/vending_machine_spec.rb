@@ -247,26 +247,14 @@ describe 'VendingMachine' do
   describe '.pick_up_item' do
     context 'when an item is in the bin' do
       it 'says it has been picked up' do
-        @vm.insert_coin Coin::QUARTER
-        @vm.insert_coin Coin::QUARTER
-        @vm.add_to_inventory 'Chips'
-        @vm.select_item 'Chips'
+        @vm.product_bin = ['Chips']
         expect(@vm.pick_up_item).to eq 'You have picked up Chips!'
       end
     end
 
     context 'when multiple items are in the bin' do
       it ' says they have been picked up' do
-        @vm.add_to_inventory 'Chips'
-        @vm.add_to_inventory 'Pop'
-        @vm.insert_coin Coin::QUARTER
-        @vm.insert_coin Coin::QUARTER
-        @vm.insert_coin Coin::QUARTER
-        @vm.insert_coin Coin::QUARTER
-        @vm.select_item 'Pop'
-        @vm.insert_coin Coin::QUARTER
-        @vm.insert_coin Coin::QUARTER
-        @vm.select_item 'Chips'
+        @vm.product_bin = %w(Pop Chips)
         expect(@vm.pick_up_item).to eq 'You have picked up Chips!'
         expect(@vm.pick_up_item).to eq 'You have picked up Pop!'
       end
@@ -334,6 +322,15 @@ describe 'VendingMachine' do
     context 'when on the main menu and get from bin is called with nothing in it' do
       it 'returns an appropriate message and stays on the main menu' do
         expect(@vm.process_input 3).to eq 'THE BIN IS EMPTY!'
+        expect(@vm.get_current_menu).to eq "-- MAIN --\n\n1) INSERT COIN\n2) SELECT ITEM\n3) TAKE FROM BIN\n4) TURN OFF\n"
+      end
+    end
+
+    context 'when on the main menu and get from bin is called with something in it' do
+      it 'returns an appropriate message and stays on the main menu' do
+        @vm.product_bin = %w(Pop Chips)
+        expect(@vm.process_input 3).to eq 'You have picked up Chips!'
+        expect(@vm.process_input 3).to eq 'You have picked up Pop!'
         expect(@vm.get_current_menu).to eq "-- MAIN --\n\n1) INSERT COIN\n2) SELECT ITEM\n3) TAKE FROM BIN\n4) TURN OFF\n"
       end
     end
