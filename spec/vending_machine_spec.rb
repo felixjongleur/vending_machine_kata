@@ -351,6 +351,18 @@ describe 'VendingMachine' do
         expect(@vm.check_coin_return).to eq 1
       end
     end
+
+    context 'when on the insert coin menu and a non penny is selected' do
+      it 'adds appropriately to the available credits' do
+        @vm.process_input 1
+        @vm.process_input 2
+        expect(@vm.get_credits).to eq 5
+        @vm.process_input 3
+        expect(@vm.get_credits).to eq 15
+        @vm.process_input 4
+        expect(@vm.get_credits).to eq 40
+      end
+    end
   end
 
   describe '.is_running?' do
