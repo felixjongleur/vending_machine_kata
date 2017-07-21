@@ -1,19 +1,24 @@
 require_relative 'vending_machine'
 
-at_vending_machine = true
-
 vm = VendingMachine.new
+vm.add_to_inventory 'Pop'
+vm.add_to_inventory 'Chips'
+vm.add_to_inventory 'Candy'
 
-while at_vending_machine do
+puts '** Vending Machine is initially stocked with one of each item! **'
+puts
+
+while vm.is_running? do
 
   puts '-------------'
   puts vm.get_display
   puts '-------------'
   puts
 
-  puts vm.get_menu 'MAIN'
+  puts vm.get_current_menu
 
   puts
   puts 'ENTER CHOICE? '
-  input = STDIN.gets.chomp
+  input = STDIN.gets.chomp.to_i
+  vm.process_input input
 end

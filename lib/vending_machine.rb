@@ -26,19 +26,25 @@ class VendingMachine
   end
 
   def process_input(input)
-    if current_menu == 'MAIN'
-      case input
-        when 1
-          @current_menu = 'INSERT COIN'
-        when 2
-          @current_menu = 'SELECT PRODUCT'
-        when 3
-            pick_up_item
-        when 4
-          @running = false
-        else
-          # type code here
-      end
+    case current_menu
+      when 'MAIN'
+        case input
+          when 1
+            @current_menu = 'INSERT COIN'
+          when 2
+            @current_menu = 'SELECT PRODUCT'
+          when 3
+              pick_up_item
+          when 4
+            @running = false
+          else
+            # type code here
+        end
+      when 'INSERT COIN'
+        case input
+          when 1
+            insert_coin Coin::PENNY
+        end
     end
   end
 
