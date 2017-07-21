@@ -20,5 +20,5 @@ while vm.is_running? do
   puts
   puts 'ENTER CHOICE? '
   input = STDIN.gets.chomp.to_i
-  vm.process_input input
+  puts vm.process_input input
 end

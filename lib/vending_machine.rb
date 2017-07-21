@@ -36,9 +36,11 @@ class VendingMachine
           when 2
             @current_menu = 'SELECT PRODUCT'
           when 3
-              pick_up_item
+            pick_up_item
           when 4
-              check_coin_return
+            return_coins
+          when 5
+            check_coin_return
           when 6
             @running = false
           else
@@ -134,7 +136,7 @@ class VendingMachine
   def check_coin_return
     credits_to_return = coin_return
     @coin_return = 0
-    credits_to_return
+    "You get back #{credits_to_return} credits!"
   end
 
   def add_to_inventory(item)
@@ -185,6 +187,7 @@ class VendingMachine
   def return_coins
     @coin_return += credits
     @credits = 0
+    'All coins returned!'
   end
 
   def insert_coin(coin)
