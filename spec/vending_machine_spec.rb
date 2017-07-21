@@ -384,7 +384,7 @@ describe 'VendingMachine' do
 
     context 'when on the insert coin menu and penny is selected' do
       it 'places the coin in the coin return' do
-        @vm.process_input 1
+        expect(@vm.process_input 1).to eq 'Pennies are not accepted!'
         expect(@vm.check_coin_return).to eq 'You get back 1 credits!'
       end
     end
@@ -392,11 +392,11 @@ describe 'VendingMachine' do
     context 'when on the insert coin menu and a non penny is selected' do
       it 'adds appropriately to the available credits' do
         @vm.process_input 1
-        @vm.process_input 2
+        expect(@vm.process_input 2).to eq 'A nickel has been inserted!'
         expect(@vm.get_credits).to eq 5
-        @vm.process_input 3
+        expect(@vm.process_input 3).to eq 'A dime has been inserted!'
         expect(@vm.get_credits).to eq 15
-        @vm.process_input 4
+        expect(@vm.process_input 4).to eq 'A quarter has been inserted!'
         expect(@vm.get_credits).to eq 40
       end
     end
