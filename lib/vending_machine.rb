@@ -64,6 +64,11 @@ class VendingMachine
             @current_menu = 'MAIN'
           else
         end
+      when 'SELECT PRODUCT'
+        case input
+          when 4
+            @current_menu = 'MAIN'
+        end
     end
   end
 
@@ -78,6 +83,7 @@ class VendingMachine
         item_number += 1
       end
     end
+    menu << '4) BACK'
     @menus['SELECT PRODUCT'] = menu
   end
 
