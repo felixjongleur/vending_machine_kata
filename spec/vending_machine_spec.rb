@@ -404,11 +404,20 @@ describe 'VendingMachine' do
   end
 
   describe '.process_input for the select product menu' do
-    context 'when on the insert coin menu and back is selected' do
+    context 'when on the select product menu and back is selected' do
       it 'goes back to the main menu' do
         @vm.process_input 2
         @vm.process_input 4
         expect(@vm.current_menu).to eq 'MAIN'
+      end
+    end
+
+    context 'when on the select product menu and an item is selected without enough money' do
+      it 'returns an appropriate message' do
+        @vm.add_to_inventory 'Pop'
+        @vm.process_input 2
+        expect(@vm.process_input 1).to eq 'Not enough credits!'
+        expect(@vm.current_menu).to eq 'SELECT PRODUCT'
       end
     end
   end
