@@ -276,7 +276,7 @@ describe 'VendingMachine' do
 
     context 'when the insert coin menu is called' do
       it 'returns appropriately' do
-        expect(@vm.get_menu 'INSERT COIN').to eq "-- INSERT COIN --\n\n1) PENNY\n2) NICKEL\n3) DIME\n4) QUARTER\n"
+        expect(@vm.get_menu 'INSERT COIN').to eq "-- INSERT COIN --\n\n1) PENNY\n2) NICKEL\n3) DIME\n4) QUARTER\n5) BACK\n"
       end
     end
 
@@ -308,7 +308,7 @@ describe 'VendingMachine' do
     context 'when on the main menu and insert coins is selected' do
       it 'sets the current menu to insert coin' do
         @vm.process_input 1
-        expect(@vm.get_current_menu).to eq "-- INSERT COIN --\n\n1) PENNY\n2) NICKEL\n3) DIME\n4) QUARTER\n"
+        expect(@vm.get_current_menu).to eq "-- INSERT COIN --\n\n1) PENNY\n2) NICKEL\n3) DIME\n4) QUARTER\n5) BACK\n"
       end
     end
 
@@ -342,6 +342,22 @@ describe 'VendingMachine' do
       end
     end
 
+    context 'when on the main menu and get from coin return is called with coins in it' do
+      it 'returns an appropriate message and stays on the main menu' do
+        @vm.insert_coin Coin::NICKEL
+        @vm.return_coins
+        expect(@vm.process_input 4).to eq 5
+        @vm.insert_coin Coin::DIME
+        @vm.return_coins
+        expect(@vm.process_input 4).to eq 10
+        @vm.insert_coin Coin::QUARTER
+        @vm.return_coins
+        expect(@vm.process_input 4).to eq 25
+        expect(@vm.process_input 4).to eq 0
+        expect(@vm.get_menu 'MAIN').to eq "-- MAIN --\n\n1) INSERT COIN\n2) SELECT ITEM\n3) TAKE FROM BIN\n4) RETURN COINS\n5) TAKE FROM COIN RETURN\n6) TURN OFF\n"
+      end
+    end
+
     context 'when on the main menu and turn off is selected' do
       it 'turns off' do
         @vm.process_input 6
@@ -351,6 +367,14 @@ describe 'VendingMachine' do
   end
 
   describe '.process_input for the insert coin menu' do
+    context 'when on the insert coin menu and back is selected' do
+      it 'goes back to the main menu' do
+        @vm.process_input 1
+        @vm.process_input 5
+        expect(@vm.current_menu).to eq 'MAIN'
+      end
+    end
+
     context 'when on the insert coin menu and penny is selected' do
       it 'places the coin in the coin return' do
         @vm.process_input 1
