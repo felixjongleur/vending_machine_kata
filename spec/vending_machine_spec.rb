@@ -299,7 +299,7 @@ describe 'VendingMachine' do
   describe '.get_current_menu' do
     context 'when the vending machine is first turned on' do
       it 'returns the main menu' do
-        expect(@vm.get_menu 'MAIN').to eq "-- MAIN --\n\n1) INSERT COIN\n2) SELECT ITEM\n3) TAKE FROM BIN\n4) RETURN COINS\n5) TAKE FROM COIN RETURN\n6) TURN OFF\n"
+        expect(@vm.current_menu).to eq 'MAIN'
       end
     end
   end
@@ -308,21 +308,21 @@ describe 'VendingMachine' do
     context 'when on the main menu and insert coins is selected' do
       it 'sets the current menu to insert coin' do
         @vm.process_input 1
-        expect(@vm.get_current_menu).to eq "-- INSERT COIN --\n\n1) PENNY\n2) NICKEL\n3) DIME\n4) QUARTER\n5) BACK\n"
+        expect(@vm.current_menu).to eq 'INSERT COIN'
       end
     end
 
     context 'when on the main menu and select product is selected' do
       it 'sets the current menu to select product' do
         @vm.process_input 2
-        expect(@vm.get_current_menu).to eq "-- SELECT PRODUCT --\n\nNO PRODUCTS AVAILABLE!\n"
+        expect(@vm.current_menu).to eq 'SELECT PRODUCT'
       end
     end
 
     context 'when on the main menu and get from bin is called with nothing in it' do
       it 'returns an appropriate message and stays on the main menu' do
         expect(@vm.process_input 3).to eq 'You can not pick up nothing!'
-        expect(@vm.get_menu 'MAIN').to eq "-- MAIN --\n\n1) INSERT COIN\n2) SELECT ITEM\n3) TAKE FROM BIN\n4) RETURN COINS\n5) TAKE FROM COIN RETURN\n6) TURN OFF\n"
+        expect(@vm.current_menu).to eq 'MAIN'
       end
     end
 
@@ -331,14 +331,14 @@ describe 'VendingMachine' do
         @vm.product_bin = %w(Pop Chips)
         expect(@vm.process_input 3).to eq 'You have picked up Chips!'
         expect(@vm.process_input 3).to eq 'You have picked up Pop!'
-        expect(@vm.get_menu 'MAIN').to eq "-- MAIN --\n\n1) INSERT COIN\n2) SELECT ITEM\n3) TAKE FROM BIN\n4) RETURN COINS\n5) TAKE FROM COIN RETURN\n6) TURN OFF\n"
+        expect(@vm.current_menu).to eq 'MAIN'
       end
     end
 
     context 'when on the main menu and get from coin return is called with nothing in it' do
       it 'returns an appropriate message and stays on the main menu' do
         expect(@vm.process_input 4).to eq 0
-        expect(@vm.get_menu 'MAIN').to eq "-- MAIN --\n\n1) INSERT COIN\n2) SELECT ITEM\n3) TAKE FROM BIN\n4) RETURN COINS\n5) TAKE FROM COIN RETURN\n6) TURN OFF\n"
+        expect(@vm.current_menu).to eq 'MAIN'
       end
     end
 
@@ -354,7 +354,7 @@ describe 'VendingMachine' do
         @vm.return_coins
         expect(@vm.process_input 4).to eq 25
         expect(@vm.process_input 4).to eq 0
-        expect(@vm.get_menu 'MAIN').to eq "-- MAIN --\n\n1) INSERT COIN\n2) SELECT ITEM\n3) TAKE FROM BIN\n4) RETURN COINS\n5) TAKE FROM COIN RETURN\n6) TURN OFF\n"
+        expect(@vm.current_menu).to eq 'MAIN'
       end
     end
 
