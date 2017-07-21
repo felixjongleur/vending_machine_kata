@@ -282,7 +282,7 @@ describe 'VendingMachine' do
 
     context 'when the select product menu is called, and no products are available' do
       it 'returns appropriately' do
-        expect(@vm.get_menu 'SELECT PRODUCT').to eq "-- SELECT PRODUCT --\n\nNO PRODUCTS AVAILABLE!\n"
+        expect(@vm.get_menu 'SELECT PRODUCT').to eq "-- SELECT PRODUCT --\n\nNO PRODUCTS AVAILABLE!\n4) BACK\n"
       end
     end
 
@@ -291,7 +291,7 @@ describe 'VendingMachine' do
         @vm.add_to_inventory 'Chips'
         @vm.add_to_inventory 'Pop'
         @vm.add_to_inventory 'Candy'
-        expect(@vm.get_menu 'SELECT PRODUCT').to eq "-- SELECT PRODUCT --\n\n1) CHIPS\n2) POP\n3) CANDY\nn4) BACK\n"
+        expect(@vm.get_menu 'SELECT PRODUCT').to eq "-- SELECT PRODUCT --\n\n1) CHIPS\n2) POP\n3) CANDY\n4) BACK\n"
       end
     end
   end
