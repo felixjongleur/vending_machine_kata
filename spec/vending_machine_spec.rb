@@ -420,6 +420,16 @@ describe 'VendingMachine' do
         expect(@vm.current_menu).to eq 'SELECT PRODUCT'
       end
     end
+
+    context 'when on the select product menu and an item is selected with enough money' do
+      it 'returns an appropriate message and places the item in the bin' do
+        @vm.add_to_inventory 'Pop'
+        @vm.credits = 100
+        @vm.process_input 2
+        expect(@vm.process_input 1).to eq 'Pop has been placed in the bin!'
+        expect(@vm.current_menu).to eq 'SELECT PRODUCT'
+      end
+    end
   end
 
   describe '.is_running?' do
