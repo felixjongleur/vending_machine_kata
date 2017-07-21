@@ -33,9 +33,7 @@ class VendingMachine
         when 2
           @current_menu = 'SELECT PRODUCT'
         when 3
-          if product_bin.empty?
-            return 'THE BIN IS EMPTY!'
-          end
+            pick_up_item
         when 4
           @running = false
         else
