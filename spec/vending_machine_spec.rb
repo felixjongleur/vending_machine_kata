@@ -335,6 +335,13 @@ describe 'VendingMachine' do
       end
     end
 
+    context 'when on the main menu and get from coin return is called with nothing in it' do
+      it 'returns an appropriate message and stays on the main menu' do
+        expect(@vm.process_input 4).to eq 0
+        expect(@vm.get_menu 'MAIN').to eq "-- MAIN --\n\n1) INSERT COIN\n2) SELECT ITEM\n3) TAKE FROM BIN\n4) RETURN COINS\n5) TAKE FROM COIN RETURN\n6) TURN OFF\n"
+      end
+    end
+
     context 'when on the main menu and turn off is selected' do
       it 'turns off' do
         @vm.process_input 6
