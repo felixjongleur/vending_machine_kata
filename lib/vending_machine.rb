@@ -44,6 +44,13 @@ class VendingMachine
         case input
           when 1
             insert_coin Coin::PENNY
+          when 2
+            insert_coin Coin::NICKEL
+          when 3
+            insert_coin Coin::DIME
+          when 4
+            insert_coin Coin::QUARTER
+          else
         end
     end
   end
