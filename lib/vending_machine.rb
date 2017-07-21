@@ -65,9 +65,12 @@ class VendingMachine
           else
         end
       when 'SELECT PRODUCT'
+        generate_product_menu
         case input
           when 4
             @current_menu = 'MAIN'
+          else
+            select_item @menus['SELECT PRODUCT'][input - 1].split(' ')[1].capitalize
         end
     end
   end
@@ -175,6 +178,7 @@ class VendingMachine
     @item_selected = item
     if credits < get_price(item)
       @insufficient_funds = true
+      'Not enough credits!'
     else
       @product_bin.push item
       @inventory[item] -= 1
