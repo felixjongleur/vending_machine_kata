@@ -1,3 +1,5 @@
+require_relative '../lib/coin'
+
 class VendingMachine
 
   attr_accessor :credits, :coin_return, :product_bin, :item_selected, :insufficient_funds
@@ -16,7 +18,7 @@ class VendingMachine
     @current_menu = 'MAIN'
     @menus = {}
     @menus['MAIN'] = ['1) INSERT COIN', '2) SELECT ITEM', '3) TAKE FROM BIN', '4) RETURN COINS', '5) TAKE FROM COIN RETURN', '6) TURN OFF']
-    @menus['INSERT COIN'] = ['1) PENNY', '2) NICKEL', '3) DIME', '4) QUARTER']
+    @menus['INSERT COIN'] = ['1) PENNY', '2) NICKEL', '3) DIME', '4) QUARTER', '5) BACK']
 
     @running = true
   end
@@ -36,6 +38,8 @@ class VendingMachine
           when 3
               pick_up_item
           when 4
+              check_coin_return
+          when 6
             @running = false
           else
             # type code here
@@ -50,6 +54,8 @@ class VendingMachine
             insert_coin Coin::DIME
           when 4
             insert_coin Coin::QUARTER
+          when 5
+            @current_menu = 'MAIN'
           else
         end
     end
@@ -126,7 +132,9 @@ class VendingMachine
   end
 
   def check_coin_return
-    coin_return
+    credits_to_return = coin_return
+    @coin_return = 0
+    credits_to_return
   end
 
   def add_to_inventory(item)
