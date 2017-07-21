@@ -15,7 +15,7 @@ class VendingMachine
 
     @current_menu = 'MAIN'
     @menus = {}
-    @menus['MAIN'] = ['1) INSERT COIN', '2) SELECT ITEM', '3) TAKE FROM BIN', '4) TURN OFF']
+    @menus['MAIN'] = ['1) INSERT COIN', '2) SELECT ITEM', '3) TAKE FROM BIN', '4) RETURN COINS', '5) TAKE FROM COIN RETURN', '6) TURN OFF']
     @menus['INSERT COIN'] = ['1) PENNY', '2) NICKEL', '3) DIME', '4) QUARTER']
 
     @running = true

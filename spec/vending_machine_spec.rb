@@ -270,7 +270,7 @@ describe 'VendingMachine' do
   describe '.get_menu' do
     context 'when the main menu is called' do
       it 'returns appropriately' do
-        expect(@vm.get_menu 'MAIN').to eq "-- MAIN --\n\n1) INSERT COIN\n2) SELECT ITEM\n3) TAKE FROM BIN\n4)RETURN COINS 5)TAKE FROM COIN RETURN 6) TURN OFF\n"
+        expect(@vm.get_menu 'MAIN').to eq "-- MAIN --\n\n1) INSERT COIN\n2) SELECT ITEM\n3) TAKE FROM BIN\n4) RETURN COINS\n5) TAKE FROM COIN RETURN\n6) TURN OFF\n"
       end
     end
 
@@ -299,7 +299,7 @@ describe 'VendingMachine' do
   describe '.get_current_menu' do
     context 'when the vending machine is first turned on' do
       it 'returns the main menu' do
-        expect(@vm.get_current_menu).to eq "-- MAIN --\n\n1) INSERT COIN\n2) SELECT ITEM\n3) TAKE FROM BIN\n4) TURN OFF\n"
+        expect(@vm.get_menu 'MAIN').to eq "-- MAIN --\n\n1) INSERT COIN\n2) SELECT ITEM\n3) TAKE FROM BIN\n4) RETURN COINS\n5) TAKE FROM COIN RETURN\n6) TURN OFF\n"
       end
     end
   end
@@ -322,7 +322,7 @@ describe 'VendingMachine' do
     context 'when on the main menu and get from bin is called with nothing in it' do
       it 'returns an appropriate message and stays on the main menu' do
         expect(@vm.process_input 3).to eq 'You can not pick up nothing!'
-        expect(@vm.get_current_menu).to eq "-- MAIN --\n\n1) INSERT COIN\n2) SELECT ITEM\n3) TAKE FROM BIN\n4) TURN OFF\n"
+        expect(@vm.get_menu 'MAIN').to eq "-- MAIN --\n\n1) INSERT COIN\n2) SELECT ITEM\n3) TAKE FROM BIN\n4) RETURN COINS\n5) TAKE FROM COIN RETURN\n6) TURN OFF\n"
       end
     end
 
@@ -331,13 +331,13 @@ describe 'VendingMachine' do
         @vm.product_bin = %w(Pop Chips)
         expect(@vm.process_input 3).to eq 'You have picked up Chips!'
         expect(@vm.process_input 3).to eq 'You have picked up Pop!'
-        expect(@vm.get_current_menu).to eq "-- MAIN --\n\n1) INSERT COIN\n2) SELECT ITEM\n3) TAKE FROM BIN\n4) TURN OFF\n"
+        expect(@vm.get_menu 'MAIN').to eq "-- MAIN --\n\n1) INSERT COIN\n2) SELECT ITEM\n3) TAKE FROM BIN\n4) RETURN COINS\n5) TAKE FROM COIN RETURN\n6) TURN OFF\n"
       end
     end
 
     context 'when on the main menu and turn off is selected' do
       it 'turns off' do
-        @vm.process_input 4
+        @vm.process_input 6
         expect(@vm.is_running?).to be false
       end
     end
