@@ -184,6 +184,7 @@ class VendingMachine
       @inventory[item] -= 1
       @coin_return += (credits - get_price(item))
       @credits = 0
+      "#{item} has been placed in the bin!"
     end
   end
 
